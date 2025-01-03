@@ -1,5 +1,8 @@
 package utils;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class InputUtil {
@@ -19,7 +22,7 @@ public class InputUtil {
   }
 
   public boolean checkInputCSVFilePath() {
-    return checkBlank() || checkExtension() ? true : false;
+    return checkBlank() || checkExtension() || checkExist() ? true : false;
   }
 
   boolean checkBlank() {
@@ -33,6 +36,15 @@ public class InputUtil {
   boolean checkExtension() {
     if (csvFilePath.length() < 4 || !csvFilePath.substring(csvFilePath.length() - 4).equals(".csv")) {
       System.out.println("※※※入力されたファイルがcsvではありません※※※");
+      return true;
+    }
+    return false;
+  }
+
+  boolean checkExist() {
+    Path targetFilePath = Paths.get(csvFilePath);
+    if (!Files.exists(targetFilePath)) {
+      System.out.println("※※※指定されたファイルが存在しません※※※");
       return true;
     }
     return false;

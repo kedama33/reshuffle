@@ -1,8 +1,4 @@
-// cd class
-// javac -d class Main.java
-
-// cd class
-// java Main
+// cd ../ && javac -d class Main.java && cd class && java Main
 
 import utils.InputUtil;
 
