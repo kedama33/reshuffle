@@ -12,5 +12,8 @@ public class Main {
 
         // 入力したいcsvファイルのパスをターミナルから受け取る
         inputUtil.inputFilePath();
+
+        // 受け取ったパスをチェックする
+        inputUtil.checkInputCSVFilePath();
     }
 }
