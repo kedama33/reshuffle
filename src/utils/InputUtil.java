@@ -8,10 +8,6 @@ import java.util.Scanner;
 public class InputUtil {
   String csvFilePath = "";
 
-  public String getCsvFilePath() {
-    return csvFilePath;
-  }
-
   public void inputFilePath() {
     Scanner sc = new Scanner(System.in);
 
