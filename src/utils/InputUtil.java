@@ -1,5 +1,6 @@
 package utils;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -7,6 +8,7 @@ import java.util.Scanner;
 
 public class InputUtil {
   String csvFilePath = "";
+  Path targetFilePath;
 
   public void inputFilePath() {
     Scanner sc = new Scanner(System.in);
@@ -18,7 +20,7 @@ public class InputUtil {
   }
 
   public boolean checkInputCSVFilePath() {
-    return checkBlank() || checkExtension() || checkExist() ? true : false;
+    return checkBlank() || checkExtension() || checkExist() || checkByte() ? true : false;
   }
 
   boolean checkBlank() {
@@ -38,9 +40,26 @@ public class InputUtil {
   }
 
   boolean checkExist() {
-    Path targetFilePath = Paths.get(csvFilePath);
+    targetFilePath = Paths.get(csvFilePath);
     if (!Files.exists(targetFilePath)) {
       System.out.println("※※※指定されたファイルが存在しません※※※");
+      return true;
+    }
+    return false;
+  }
+
+  boolean checkByte() {
+    long targetFileSize = 0;
+
+    try {
+      targetFileSize = Files.size(targetFilePath);
+    } catch (IOException e) {
+      System.out.println("※※※ファイルサイズの確認ができませんでした※※※");
+      return true;
+    }
+
+    if (targetFileSize == 0) {
+      System.out.println("※※※指定されたファイルがゼロバイトです※※※");
       return true;
     }
     return false;
